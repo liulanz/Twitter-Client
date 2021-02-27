@@ -8,15 +8,18 @@ import com.bumptech.glide.Glide;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.parceler.Parcel;
 
 import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
-
+@Parcel
 public class User {
     public String name;
     public String screenName;
     public String profileImageUrl;
     public int favorite;
     public int retweet ;
+    public String username;
+    public User (){}
 
     public static User fromJson(JSONObject jsonObject) throws JSONException {
         User user = new User();
@@ -32,6 +35,8 @@ public class User {
             user.retweet = jsonObject.getInt("retweet_count");
         else
             user.retweet= 0;
+        if(jsonObject.has("username"))
+            user.username = jsonObject.getString("username");
         return user;
     }
     @BindingAdapter("android:loadImage")
