@@ -13,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.codepath.apps.restclienttemplate.databinding.ItemTweetBinding;
 import com.codepath.apps.restclienttemplate.models.Tweet;
 
 import java.util.List;
@@ -27,14 +28,16 @@ public class TweetsAdapter extends RecyclerView.Adapter<TweetsAdapter.ViewHolder
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.item_tweet, parent, false);
-        return new ViewHolder(view);
+        LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
+        ItemTweetBinding itemTweetBinding = ItemTweetBinding.inflate(layoutInflater, parent, false);
+        return new ViewHolder(itemTweetBinding);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Tweet tweet = tweets.get(position);
-        holder.bind(tweet);
+        holder.itemTweetBinding.setTweet(tweet);
+        holder.itemTweetBinding.executePendingBindings();
     }
 
     @Override
@@ -54,24 +57,14 @@ public class TweetsAdapter extends RecyclerView.Adapter<TweetsAdapter.ViewHolder
     // Bind values based on the position of the element
     // Define a viewholder
     public class ViewHolder extends RecyclerView.ViewHolder{
-        ImageView ivProfileImage;
-        TextView tvBody;
-        TextView tvScreenName;
-        // LayoutViewHolderBinding binding = ListItemBinding
-        public ViewHolder(@NonNull View itemView) {
+        ItemTweetBinding itemTweetBinding;
 
-            super(itemView);
-            ivProfileImage = itemView.findViewById(R.id.ivProfileImage);
-            tvBody = itemView.findViewById(R.id.tvBody);
-            tvScreenName = itemView.findViewById(R.id.tvScreenName);
-            // binding = LayoutViewholderBinding.bind(itemView);
+        public ViewHolder(@NonNull ItemTweetBinding itemTweetBinding) {
+
+            super(itemTweetBinding.getRoot());
+            this.itemTweetBinding = itemTweetBinding;
+
         }
 
-
-        public void bind(Tweet tweet) {
-            tvBody.setText(tweet.body);
-            tvScreenName.setText(tweet.user.name);
-            Glide.with(context).load(tweet.user.profileImageUrl).into(ivProfileImage);
-        }
     }
 }
