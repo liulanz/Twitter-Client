@@ -20,7 +20,7 @@
             app:layout_scrollFlags="scroll|enterAlways"
             >
             <ImageView
-                android:id="@+id/imageView"
+                android:id="@+id/logo"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:src="@drawable/twitter_logo"
@@ -35,6 +35,8 @@
     android:id="@+id/RelativeLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+
     tools:context=".TimelineActivity">
 
 

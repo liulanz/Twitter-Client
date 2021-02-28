@@ -5,18 +5,23 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import com.codepath.apps.restclienttemplate.models.DetailedTweet;
 import com.codepath.apps.restclienttemplate.models.Tweet;
 import com.codepath.asynchttpclient.callback.JsonHttpResponseHandler;
 
 import org.json.JSONArray;
 import org.json.JSONException;
+import org.parceler.Parcels;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,6 +35,7 @@ public class TimelineActivity extends AppCompatActivity {
     List<Tweet> tweets;
     TweetsAdapter adapter;
     SwipeRefreshLayout swipeContainer;
+    ImageView logo;
     EndlessRecyclerViewScrollListener scrollListener;
     public static final String TAG = "TimelineActivity";
     @Override
@@ -41,7 +47,15 @@ public class TimelineActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         setContentView(R.layout.activity_timeline);
         client = TwitterApplication.getRestClient(this);
+        logo = findViewById(R.id.logo);
+        logo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(TimelineActivity.this, LoginActivity.class);
 
+                TimelineActivity.this.startActivity(i);
+            }
+        });
         rvTweets = findViewById(R.id.rvTweets);
         swipeContainer = findViewById(R.id.swipeContainer);
         swipeContainer.setColorSchemeResources(android.R.color.holo_blue_bright,

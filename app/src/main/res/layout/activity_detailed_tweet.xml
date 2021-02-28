@@ -22,7 +22,9 @@
 
     <ImageView
         android:id="@+id/ivProfileImg"
+        android:layout_marginTop="10dp"
         android:loadImage="@{tweet.user.profileImageUrl}"
+        android:layout_marginLeft="20dp"
         android:layout_width="70dp"
         android:layout_height="70dp"
          />
@@ -33,21 +35,25 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="15dp"
+        android:textStyle="bold"
         android:layout_toEndOf="@+id/ivProfileImg"
         android:text="@{tweet.user.name}"
         android:textColor="#000000"
         android:textSize="10pt" />
 
-    <TextView
-        android:id="@+id/tvBody"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/ivProfileImg"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="20dp"
-        android:text="@{tweet.body}"
-        android:textSize="25sp" />
+        <TextView
+            android:id="@+id/tvBody"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/ivProfileImg"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="20dp"
+            android:lineSpacingExtra="8sp"
+            android:text="@{tweet.body}"
+            android:autoLink="all"
+            android:linksClickable="true"
+            android:textSize="20sp" />
 
     <TextView
         android:id="@+id/tvCreateOn"
@@ -55,10 +61,11 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/ivPostImage"
         android:layout_marginTop="20dp"
+        android:layout_marginLeft="20dp"
         android:layout_marginBottom="20dp"
         android:text="@{tweet.createdAt}"
         android:textSize="20sp"
-        tools:layout_marginLeft="20dp" />
+        />
 
     <ImageView
         android:id="@+id/ivPostImage"
