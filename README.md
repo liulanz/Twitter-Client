@@ -2,7 +2,7 @@
 
 **Twitter Clientp** is an android app that allows a user to view his Twitter timeline. The app utilizes [Twitter REST API](https://dev.twitter.com/rest/public).
 
-Time spent: **20** hours spent in total
+Time spent: **25** hours spent in total
 
 ## User Stories
 
@@ -21,7 +21,7 @@ The following **optional** features are implemented:
 - [x] Links in tweets are clickable and will launch the web browser
 - [x] User can tap a tweet to display a "detailed" view of that tweet
 - [x] User can see embedded image media within the tweet detail view
-- [x] User can watch embedded video within the tweet
+- [ ] User can watch embedded video within the tweet
 - [ ] User can open the twitter app offline and see last loaded tweets
 - [x] On the Twitter timeline, leverage the CoordinatorLayout to apply scrolling behavior that hides / shows the toolbar.
 
@@ -34,6 +34,7 @@ The following **additional** features are implemented:
 Here's a walkthrough of implemented user stories:
 
 <img src="demo/login.gif" width=250>
+<img src="demo/part1_image.gif" width=250>
 <img src="demo/part1.gif" width=250>
 
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
