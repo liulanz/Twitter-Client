@@ -9,19 +9,14 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Parcel;
 import android.util.Log;
 import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.Toast;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-import com.codepath.apps.restclienttemplate.models.DetailedTweet;
 import com.codepath.apps.restclienttemplate.models.Media;
 import com.codepath.apps.restclienttemplate.models.Tweet;
 import com.codepath.apps.restclienttemplate.models.TweetDao;
@@ -46,6 +41,7 @@ public class TimelineActivity extends AppCompatActivity {
     List<Tweet> tweets;
     TweetsAdapter adapter;
     SwipeRefreshLayout swipeContainer;
+    ImageView ivEdit;
     private final int REQUEST_CODE = 20;
     ImageView logo;
     EndlessRecyclerViewScrollListener scrollListener;
@@ -53,15 +49,17 @@ public class TimelineActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-//        // Sets the Toolbar to act as the ActionBar for this Activity window.
-//        // Make sure the toolbar exists in the activity and is not null
-//        setSupportActionBar(toolbar);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        // Sets the Toolbar to act as the ActionBar for this Activity window.
+        // Make sure the toolbar exists in the activity and is not null
+        setSupportActionBar(toolbar);
         setContentView(R.layout.activity_timeline);
+
+        //toolbar.inflateMenu(R.menu.menu_main);
         client = TwitterApplication.getRestClient(this);
         tweetDao = ((TwitterApplication) getApplicationContext()).getMyDatabase().tweetDao();
 
-//        logo = findViewById(R.id.logo);
+        logo = findViewById(R.id.logo);
 //        logo.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View view) {
@@ -70,6 +68,16 @@ public class TimelineActivity extends AppCompatActivity {
 //                TimelineActivity.this.startActivity(i);
 //            }
 //        });
+        ivEdit = findViewById(R.id.ivEdit);
+        ivEdit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //Toast.makeText(TimelineActivity.this,"Compose!", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(TimelineActivity.this, ComposeActivity.class);
+
+                startActivityForResult(intent, REQUEST_CODE);
+            }
+        });
         rvTweets = findViewById(R.id.rvTweets);
         swipeContainer = findViewById(R.id.swipeContainer);
         swipeContainer.setColorSchemeResources(android.R.color.holo_blue_bright,
@@ -115,6 +123,7 @@ public class TimelineActivity extends AppCompatActivity {
 
     }
 
+
     private void loadMoreData() {
         // Send an API request to retrieve appropriate paginated data
         //  --> Send the request including an offset value (i.e `page`) as a query parameter.
@@ -150,17 +159,18 @@ public class TimelineActivity extends AppCompatActivity {
         return true;
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == R.id.compose){
-          //  Toast.makeText(this,"Compose!", Toast.LENGTH_SHORT).show();
-            Intent intent = new Intent(this, ComposeActivity.class);
 
-            startActivityForResult(intent, REQUEST_CODE);
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
+//    @Override
+//    public boolean onOptionsItemSelected(MenuItem item) {
+//        if (item.getItemId() == R.id.compose){
+//          //  Toast.makeText(this,"Compose!", Toast.LENGTH_SHORT).show();
+//            Intent intent = new Intent(this, ComposeActivity.class);
+//
+//            startActivityForResult(intent, REQUEST_CODE);
+//            return true;
+//        }
+//        return super.onOptionsItemSelected(item);
+//    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
