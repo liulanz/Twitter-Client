@@ -31,38 +31,42 @@
             tools:layout_alignParentStart="false"
             />
 
+            <TextView
+                android:id="@+id/tvScreenName"
+                android:layout_toEndOf="@+id/ivProfileImg"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="0dp"
+                android:textColor="#000000"
+                android:textSize="45px"
+                android:text="@{tweet.user.name}"
+                android:textStyle="bold" />
+
         <TextView
-            android:id="@+id/tvScreenName"
+            android:id="@+id/tvTimestamp"
+
+            android:layout_marginStart="10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentStart="false"
-            android:layout_alignParentTop="true"
-            android:layout_marginStart="5dp"
-            android:layout_marginTop="0dp"
-            android:layout_toEndOf="@+id/ivProfileImg"
-            android:textColor="#000000"
-            android:textSize="40px"
-            android:text="@{tweet.user.name}"
-            android:textStyle="bold" />
-<!--        <TextView-->
-<!--            android:id="@+id/tvTimestamp"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_marginStart="50dp"-->
-<!--            android:layout_toEndOf="@+id/tvScreenName"-->
-<!--            android:text="@{tweet.timestamp}" />-->
+            android:layout_toEndOf="@+id/tvScreenName"
+            android:text="@{tweet.timestamp}" />
+
+
+
 
         <TextView
             android:id="@+id/tvBody"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/tvScreenName"
+    android:layout_below="@id/tvTimestamp"
             android:layout_marginStart="5dp"
             android:textColor="#000000"
             android:layout_marginTop="0dp"
             android:layout_toEndOf="@+id/ivProfileImg"
             android:autoLink="all"
-            android:textSize="50px"
+            android:textSize="48px"
             android:linksClickable="true"
             android:text="@{tweet.body}" />
 
@@ -127,6 +131,8 @@
             android:visibility="visible"
             android:background="@android:color/darker_gray"
             android:layout_below="@+id/layout"/>
+
+
 
 
     </RelativeLayout>

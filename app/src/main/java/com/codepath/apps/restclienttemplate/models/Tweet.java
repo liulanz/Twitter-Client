@@ -67,40 +67,43 @@ public class Tweet {
         Tweet tweet = new Tweet();
         tweet.body = jsonObject.getString("text");
         tweet.createdAt = jsonObject.getString("created_at");
+
+        String twitterFormat = "EEE MMM dd HH:mm:ss ZZZZZ yyyy";
+        SimpleDateFormat sf = new SimpleDateFormat(twitterFormat, Locale.ENGLISH);
+        sf.setLenient(true);
+        try{
+
+            long time = sf.parse(tweet.createdAt).getTime();
+           // Log.i("Tweet", Long.toString(time));
+            long now = System.currentTimeMillis();
+            final long diff = now-time;
+            if (diff < MINUTE_MILLIS) {
+                tweet.timestamp =  "just now";
+            } else if (diff < 2 * MINUTE_MILLIS) {
+                tweet.timestamp =  "a minute ago";
+            } else if (diff < 50 * MINUTE_MILLIS) {
+                tweet.timestamp =  diff / MINUTE_MILLIS + " m";
+            } else if (diff < 90 * MINUTE_MILLIS) {
+                tweet.timestamp =  "an hour ago";
+            } else if (diff < 24 * HOUR_MILLIS) {
+                tweet.timestamp =  diff / HOUR_MILLIS + " h";
+            } else if (diff < 48 * HOUR_MILLIS) {
+                tweet.timestamp =  "yesterday";
+            } else {
+                tweet.timestamp =  diff / DAY_MILLIS + " d";
+            }
+
+
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        Log.i("Tweet", tweet.timestamp);
         for (int i = 0 ;  i < tweet.createdAt.length(); i++){
             if (tweet.createdAt.charAt(i) == '+'){
                 tweet.createdAt = tweet.createdAt.substring(0, i);
                 break;
             }
         }
-//        String twitterFormat = "EEE MMM dd HH:mm:ss ZZZZZ yyyy";
-//        SimpleDateFormat sf = new SimpleDateFormat(twitterFormat, Locale.ENGLISH);
-//        sf.setLenient(true);
-//        try{
-//
-//            long time = sf.parse(tweet.createdAt).getTime();
-//            long now = System.currentTimeMillis();
-//            final long diff = now-time;
-//            if (diff < MINUTE_MILLIS) {
-//                tweet.timestamp =  "just now";
-//            } else if (diff < 2 * MINUTE_MILLIS) {
-//                tweet.timestamp =  "a minute ago";
-//            } else if (diff < 50 * MINUTE_MILLIS) {
-//                tweet.timestamp =  diff / MINUTE_MILLIS + " m";
-//            } else if (diff < 90 * MINUTE_MILLIS) {
-//                tweet.timestamp =  "an hour ago";
-//            } else if (diff < 24 * HOUR_MILLIS) {
-//                tweet.timestamp =  diff / HOUR_MILLIS + " h";
-//            } else if (diff < 48 * HOUR_MILLIS) {
-//                tweet.timestamp =  "yesterday";
-//            } else {
-//                tweet.timestamp =  diff / DAY_MILLIS + " d";
-//            }
-//
-//
-//        } catch (ParseException e) {
-//            e.printStackTrace();
-//        }
 
         tweet.user = User.fromJson(jsonObject.getJSONObject("user"));
         tweet.userId = tweet.user.id;
