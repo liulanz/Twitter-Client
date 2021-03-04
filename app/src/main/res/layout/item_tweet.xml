@@ -23,8 +23,8 @@
         <ImageView
             android:loadImage="@{tweet.user.profileImageUrl}"
             android:id="@+id/ivProfileImg"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
             android:layout_marginTop="0dp"
@@ -44,6 +44,13 @@
             android:textSize="40px"
             android:text="@{tweet.user.name}"
             android:textStyle="bold" />
+<!--        <TextView-->
+<!--            android:id="@+id/tvTimestamp"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginStart="50dp"-->
+<!--            android:layout_toEndOf="@+id/tvScreenName"-->
+<!--            android:text="@{tweet.timestamp}" />-->
 
         <TextView
             android:id="@+id/tvBody"
@@ -120,5 +127,7 @@
             android:visibility="visible"
             android:background="@android:color/darker_gray"
             android:layout_below="@+id/layout"/>
+
+
     </RelativeLayout>
 </layout>

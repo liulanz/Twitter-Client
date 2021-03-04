@@ -29,15 +29,20 @@ public class DetailedTweet extends AppCompatActivity {
         final VideoView videoView = activityDetailedTweetBinding.videoView;
         Tweet tweet= Parcels.unwrap(getIntent().getParcelableExtra("tweet"));
         activityDetailedTweetBinding.setTweet(tweet);
-//        if (tweet.media.type.equals("video")) {
-//            Log.i("Video",tweet.media.media_url);
-//            MediaController mediaController = new MediaController(this);
-//            mediaController.setAnchorView(videoView);
-//
-//            videoView.setMediaController(mediaController);
-//            videoView.setVideoURI(Uri.parse(tweet.media.media_url));
-//            videoView.start();
-//        }
+        if (tweet.media.type.equals("video")) {
+            Log.i("Video",tweet.media.media_url);
+            MediaController mediaController = new MediaController(this);
+            mediaController.setAnchorView(videoView);
+
+            videoView.setMediaController(mediaController);
+            videoView.setVideoURI(Uri.parse(tweet.media.media_url));
+            videoView.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+                // Close the progress bar and play the video
+                public void onPrepared(MediaPlayer mp) {
+                    videoView.start();
+                }
+            });
+        }
 
     }
 }
