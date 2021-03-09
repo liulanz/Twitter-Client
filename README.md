@@ -45,7 +45,7 @@ The following **additional** features are implemented:
 
 Here's a walkthrough of implemented user stories:
 
-<img src="demo/part2.gif" width=250><img src="demo/login.gif" width=250> <img src="demo/part1_image.gif" width=250>
+<img src="demo/part2.gif" width=250><img src="demo/login.gif" width=250> <img src="demo/offline.gif" width=250>
 
 
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
